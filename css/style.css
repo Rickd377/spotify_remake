@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    background-image: url(../images-assets/background.png);
+    background-size: cover;
+    backdrop-filter: blur(10px);
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 125px 8% 0 8%;
+    padding-top: 150px;
+    color: white;
+}
+
+:root {
+    --white: #fff;
+    --black: #000;
+    --green: #1dcf5d;
+
+    --opacity-white-20: #ffffff33;
+    --opacity-white-40: #ffffff66;
+    --opacity-white-60: #ffffff99;
+    --opacity-white-80: #ffffffcc;
+
+    --circle-border-radius: 50%;
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+header {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    top: 0;
+    color: var(--white);
+}
+
+body.starboy-background {
+    background-image: url('/images-assets/starboy.png');
+}
+
+
+body.west-coast-background {
+    background-image: url('/images-assets/west_coast.png');
+}
+
+body.ocean-eyes-background {
+    background-image: url('/images-assets/ocean_eyes.jpg');
+}
+
+body.i-see-red-background {
+    background-image: url('/images-assets/i_see_red.jpg');
+}
+
+body.take-my-breath-background {
+    background-image: url('/images-assets/take_my_breath.jpg');
+}
+
+body.shameless-background {
+    background-image: url('/images-assets/shameless.jpg');
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden-header {
+    display: none;
+}
+
+header .logo {
+    height: 50px;
+}
+
+.container {
+    width: 1200px;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.song {
+    background-color: var(--white);
+    border-radius: 50px;
+    display: flex; /* Change to flex */
+    align-items: center; /* Align items vertically */
+    position: relative;
+    height: 60px;
+    box-shadow: 4px 5px 10px #ffffff33;
+}
+
+.container a {
+    color: var(--black);
+}
+
+.album-cover-logo {
+    height: 50px;
+    width: 50px;
+    border-radius: var(--circle-border-radius);
+    margin-right: 10px; /* Add some space between the logo and the song info */
+    margin-left: 5px;
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
+    gap: 2px;
+}
+
+.song-info * {
+    margin: 0;
+    padding: 0;
+}
+
+.song-info p {
+    font-size: 0.8rem;
+}
+
+.page {
+    display: none;
+}
+
+#home {
+    display: block;
+}
+
+.home-link {
+    color: var(--white);
+    mix-blend-mode: difference;
+    position: absolute;
+    left: 3%;
+    top: 3%;
+    font-size: 1.8rem;
+}
+
+/* music player styling */
+
+.player {
+    background-color: #1a251d;
+    height: fit-content;
+    width: 275px;
+    border-radius: 33px;
+    padding: 20px 20px 40px 20px;
+    box-shadow: -5px 10px 20px rgba(0,0,0,0.5);
+}
+
+.album-cover {
+    border-radius: 30px;
+    aspect-ratio: 1/1;
+    background-size: cover;
+}
+
+.album-starboy {
+    background-image: url(/Images/weeknd.png);
+}
+
+.device {
+    color: #1dcf5d;
+    text-transform: capitalize;
+    font-weight: 600;
+    margin: 10px 0 5px 0;
+    font-size: 13px;
+}
+
+.song-title {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.artist {
+    font-weight: 300;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+
+.progress-bar {
+    position: relative;
+}
+
+.progress-bar-full::before {
+    width: 100% !important;
+}
+
+.progress-bar.running::before {
+    animation-play-state: running;
+}
+
+.progress-bar::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    right: 0;
+    height: 4px;
+    background-color: #545656;
+    border-radius: 5px;
+}
+
+.times {
+    position: relative;
+}
+
+.times #elapsed-time {
+    position: absolute;
+    color: #545656;
+    left: 0;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.times #remaining-time {
+    position: absolute;
+    color: #545656;
+    right: 0;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.play-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 55px;
+}
+
+.fa-backward,
+.fa-pause,
+.fa-play,
+.fa-forward {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.fa-pause,
+.fa-play {
+    width: 20px;
+}
+
+.icon-switch-green {
+    color: var(--green);
+}
+
+.fa-shuffle,
+.fa-repeat {
+    width: 15px;
+    cursor: pointer;
+}
+
+.backpage {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background-color: #222;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -2.5px 7px 20px rgba(0,0,0,0.5);
+}
+
+.backpage i {
+    font-size: 35px;
+    cursor: pointer;
+    color: white;
+}
+
+.volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #545656;
+    font-size: 13px;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+.volume input {
+    max-width: 400px;
+    width: 65%;
+    margin: 0 10px;
+    appearance: none;
+    height: 4px;
+    border-radius: 25px;
+    background-color: #545656;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+input::-webkit-slider-thumb {
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: -208px 0 0 200px white;
+}
+
+#audioElement {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}

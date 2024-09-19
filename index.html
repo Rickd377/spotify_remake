@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/29186d169c.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="images-assets/spotify_logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Spotify Player</title>
+</head>
+<body>
+
+    <header>
+        <img src="images-assets/spotify_logo.png" alt="" class="logo">
+        <h1 class="title">Your Song Library</h1>
+    </header>
+
+    <div class="all-pages">
+
+        <a href="#" data-target="home" class="home-link"><i class="fa-solid fa-arrow-left"></i></a> <!-- Add this link -->
+
+        <div id="home" class="page">
+            <div class="container">
+                <a href="#" class="song" data-target="starboy">
+                    <img src="images-assets/starboy.png" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Starboy</h3>
+                        <p>The Weeknd</p>
+                    </div>
+                </a>
+                <a href="#" class="song" data-target="west-coast">
+                    <img src="images-assets/west_coast.png" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>West Coast</h3>
+                        <p>Lana Del Rey</p>
+                    </div>
+                </a>
+                <a href="#" class="song" data-target="ocean-eyes">
+                    <img src="images-assets/ocean_eyes.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Ocean Eyes</h3>
+                        <p>Billie Eilish</p>
+                    </div>
+                </a>
+                <a href="#" class="song" data-target="i-see-red">
+                    <img src="images-assets/i_see_red.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>I See Red</h3>
+                        <p>Everybody Loves an Outlaw</p>
+                    </div>
+                </a>
+                <a href="#" class="song" data-target="take-my-breath">
+                    <img src="images-assets/take_my_breath.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Take My Breath</h3>
+                        <p>The Weeknd</p>
+                    </div>
+                </a>
+                <a href="#" class="song" data-target="shameless">
+                    <img src="images-assets/shameless.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Shameless</h3>
+                        <p>Camila Cabello</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+            
+        <div id="starboy" class="page">
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Computer</div>
+                <div class="song-title">starboy</div>
+                <div class="artist">the weeknd, daft punk</div>
+                <div class="progress-bar" id="progressBarStarboy"></div>
+                <div class="times">
+                    <div id="elapsed-time"></div>
+                    <div id="remaining-time"></div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <i class="fa-solid fa-backward" id="backBtn" onclick="resetProgressBar()"></i>
+                    <i class="fa-solid fa-play" id="icon" onclick="changeIcon(this)"></i>
+                    <a href="#" data-target="west-coast" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="100" value="30" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="west-coast" class="page">
+            west coast
+        </div>
+
+        <div id="ocean-eyes" class="page">
+            ocean eyes
+        </div>
+
+        <div id="i-see-red" class="page">
+            i see red
+        </div>
+
+        <div id="take-my-breath" class="page">
+            take my breath
+        </div>
+
+        <div id="shameless" class="page">
+            shameless
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
