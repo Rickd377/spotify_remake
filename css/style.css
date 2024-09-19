@@ -213,15 +213,15 @@ header .logo {
 }
 
 .west-coast-pb {
-    animation-duration: 250000ms !important;
+    animation-duration: 265000ms !important;
 }
 
 .ocean-eyes-pb {
-    animation-duration: 200000ms !important;
+    animation-duration: 195000ms !important;
 }
 
 .i-see-red-pb {
-    animation-duration: 220000ms !important;
+    animation-duration: 229000ms !important;
 }
 
 .take-my-breath-pb {
@@ -229,7 +229,7 @@ header .logo {
 }
 
 .shameless-pb {
-    animation-duration: 210000ms !important;
+    animation-duration: 216000ms !important;
 }
 
 @keyframes progress {

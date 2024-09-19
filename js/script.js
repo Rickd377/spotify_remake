@@ -8,6 +8,8 @@ const audios = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    let lastPage = null;
+
     const formatTime = (time) => `${Math.floor(time / 60)}:${String(time % 60).padStart(2, '0')}`;
 
     const updateTimes = (song) => {
@@ -78,6 +80,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const restartAnimation = (song) => {
+        const progressBar = document.querySelector(`.${song}-pb`);
+        progressBar.style.animation = 'none';
+        progressBar.offsetHeight; // Trigger reflow to restart the animation
+        progressBar.style.animation = '';
+        startAnimation(song);
+    };
+
+    const getRandomPage = () => {
+        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless'];
+        let randomPage;
+        do {
+            randomPage = pages[Math.floor(Math.random() * pages.length)];
+        } while (randomPage === lastPage);
+        return randomPage;
+    };
+
+    const toggleClassOnAllElements = (selector, className) => {
+        document.querySelectorAll(selector).forEach(element => {
+            element.classList.toggle(className);
+        });
+    };
+
     window.changeIcon = (element, song) => {
         element.classList.toggle('fa-play');
         element.classList.toggle('fa-pause');
@@ -85,12 +110,25 @@ document.addEventListener('DOMContentLoaded', () => {
         element.classList.contains('fa-pause') ? (audio.play(), startAnimation(song)) : (audio.pause(), stopAnimation(song));
     };
 
-    window.switchColor = (element) => element.classList.toggle('icon-switch-green');
+    window.switchColor = (element) => {
+        const isShuffle = element.classList.contains('fa-shuffle');
+        const isRepeat = element.classList.contains('fa-repeat');
+        if (isShuffle) {
+            toggleClassOnAllElements('.fa-shuffle', 'icon-switch-green');
+        } else if (isRepeat) {
+            toggleClassOnAllElements('.fa-repeat', 'icon-switch-green');
+        }
+    };
 
-    document.querySelectorAll('.song, .forward-link').forEach(link => 
+    document.querySelectorAll('.song, .forward-link, .backward-link').forEach(link => 
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetPage = e.currentTarget.getAttribute('data-target');
+            const shuffleButton = document.querySelector('.fa-shuffle.icon-switch-green');
+            let targetPage = e.currentTarget.getAttribute('data-target');
+            if (shuffleButton) {
+                targetPage = getRandomPage();
+            }
+            lastPage = targetPage;
             sessionStorage.setItem('currentPage', targetPage);
             togglePage(targetPage);
         })
@@ -107,6 +145,16 @@ document.addEventListener('DOMContentLoaded', () => {
     Object.keys(audios).forEach(song => {
         audios[song].addEventListener('loadedmetadata', () => {
             document.getElementById(`remaining-time-${song}`).textContent = `-${formatTime(Math.floor(audios[song].duration))}`;
+        });
+
+        // Add event listener for when the audio ends
+        audios[song].addEventListener('ended', () => {
+            const repeatButton = document.querySelector(`#${song} .fa-repeat`);
+            if (repeatButton && repeatButton.classList.contains('icon-switch-green')) {
+                resetAudio(song);
+                audios[song].play();
+                restartAnimation(song);
+            }
         });
     });
 
