@@ -17,7 +17,7 @@
 
     <div class="all-pages">
 
-        <a href="#" data-target="home" class="home-link"><i class="fa-solid fa-arrow-left"></i></a> <!-- Add this link -->
+        <a href="#" data-target="home" class="home-link"><i class="fa-solid fa-arrow-left"></i></a>
 
         <div id="home" class="page">
             <div class="container">
@@ -72,15 +72,17 @@
                 <div class="device">This Computer</div>
                 <div class="song-title">starboy</div>
                 <div class="artist">the weeknd, daft punk</div>
-                <div class="progress-bar" id="progressBarStarboy"></div>
+                <div class="progress-bar">
+                    <div class="starboy-pb"></div>
+                </div>
                 <div class="times">
-                    <div id="elapsed-time"></div>
-                    <div id="remaining-time"></div>
+                    <div id="elapsed-time-starboy" class="elapsed-time">0:00</div>
+                    <div id="remaining-time-starboy" class="remaining-time">-3:50</div>
                 </div>
                 <div class="play-buttons">
                     <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
-                    <i class="fa-solid fa-backward" id="backBtn" onclick="resetProgressBar()"></i>
-                    <i class="fa-solid fa-play" id="icon" onclick="changeIcon(this)"></i>
+                    <i class="fa-solid fa-backward" id="backBtn-starboy" onclick="resetProgressBar('starboy')"></i>
+                    <i class="fa-solid fa-play" id="icon-starboy" onclick="changeIcon(this, 'starboy')"></i>
                     <a href="#" data-target="west-coast" class="forward-link">
                         <i class="fa-solid fa-forward" id="forwardBtn"></i>
                     </a>
@@ -88,30 +90,170 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="100" value="30" />
+                    <input type="range" min="0" step="1" max="10" value="1" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
         </div>
 
         <div id="west-coast" class="page">
-            west coast
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Computer</div>
+                <div class="song-title">west coast</div>
+                <div class="artist">lana del rey</div>
+                <div class="progress-bar">
+                    <div class="west-coast-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-west-coast" class="elapsed-time">0:00</div>
+                    <div id="remaining-time-west-coast" class="remaining-time">-3:50</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="starboy" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-west-coast"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-west-coast" onclick="changeIcon(this, 'west-coast')"></i>
+                    <a href="#" data-target="ocean-eyes" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="10" value="1" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
         </div>
 
         <div id="ocean-eyes" class="page">
-            ocean eyes
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Computer</div>
+                <div class="song-title">ocean eyes</div>
+                <div class="artist">billie eilish</div>
+                <div class="progress-bar">
+                    <div class="ocean-eyes-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-ocean-eyes" class="elapsed-time">0:00</div>
+                    <div id="remaining-time-ocean-eyes" class="remaining-time">-3:50</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="west-coast" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-ocean-eyes"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-ocean-eyes" onclick="changeIcon(this, 'ocean-eyes')"></i>
+                    <a href="#" data-target="i-see-red" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="10" value="1" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
         </div>
 
         <div id="i-see-red" class="page">
-            i see red
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Computer</div>
+                <div class="song-title">i see red</div>
+                <div class="artist">everybody loves an outlaw</div>
+                <div class="progress-bar">
+                    <div class="i-see-red-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-i-see-red" class="elapsed-time">0:00</div>
+                    <div id="remaining-time-i-see-red" class="remaining-time">-3:50</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="ocean-eyes" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-i-see-red"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-i-see-red" onclick="changeIcon(this, 'i-see-red')"></i>
+                    <a href="#" data-target="take-my-breath" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="10" value="1" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
         </div>
 
         <div id="take-my-breath" class="page">
-            take my breath
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Computer</div>
+                <div class="song-title">take my breath</div>
+                <div class="artist">the weeknd</div>
+                <div class="progress-bar">
+                    <div class="take-my-breath-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-take-my-breath" class="elapsed-time">0:00</div>
+                    <div id="remaining-time-take-my-breath" class="remaining-time">-3:50</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="i-see-red" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-take-my-breath"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-take-my-breath" onclick="changeIcon(this, 'take-my-breath')"></i>
+                    <a href="#" data-target="shameless" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="10" value="1" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
         </div>
 
         <div id="shameless" class="page">
-            shameless
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Computer</div>
+                <div class="song-title">shameless</div>
+                <div class="artist">camila cabello</div>
+                <div class="progress-bar">
+                    <div class="shameless-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-shameless" class="elapsed-time">0:00</div>
+                    <div id="remaining-time-shameless" class="remaining-time">-3:50</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="take-my-breath" class="forward-link">
+                    <i class="fa-solid fa-backward" id="backBtn-shameless"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-shameless" onclick="changeIcon(this, 'shameless')"></i>
+                    <a href="#" data-target="home" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="10" value="1" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
         </div>
 
     </div>

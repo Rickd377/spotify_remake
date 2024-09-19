@@ -186,36 +186,66 @@ header .logo {
     margin-bottom: 10px;
     margin-top: 3px;
     text-transform: capitalize;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .progress-bar {
     position: relative;
-}
-
-.progress-bar-full::before {
-    width: 100% !important;
-}
-
-.progress-bar.running::before {
-    animation-play-state: running;
-}
-
-.progress-bar::after {
-    content: "";
-    position: absolute;
     width: 100%;
-    right: 0;
-    height: 4px;
     background-color: #545656;
+    height: 4px;
     border-radius: 5px;
+    overflow: hidden;
+}
+
+.starboy-pb,
+.west-coast-pb,
+.ocean-eyes-pb,
+.i-see-red-pb,
+.take-my-breath-pb,
+.shameless-pb {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    background-color: var(--white);
+    animation: progress 230000ms linear;
+    animation-play-state: paused;
+}
+
+.west-coast-pb {
+    animation-duration: 250000ms !important;
+}
+
+.ocean-eyes-pb {
+    animation-duration: 200000ms !important;
+}
+
+.i-see-red-pb {
+    animation-duration: 220000ms !important;
+}
+
+.take-my-breath-pb {
+    animation-duration: 224000ms !important;
+}
+
+.shameless-pb {
+    animation-duration: 210000ms !important;
+}
+
+@keyframes progress {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
 }
 
 .times {
     position: relative;
 }
 
-.times #elapsed-time {
+.times .elapsed-time {
     position: absolute;
     color: #545656;
     left: 0;
@@ -223,7 +253,7 @@ header .logo {
     margin-top: 10px;
 }
 
-.times #remaining-time {
+.times .remaining-time {
     position: absolute;
     color: #545656;
     right: 0;
