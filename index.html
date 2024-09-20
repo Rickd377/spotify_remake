@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/29186d169c.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="images-assets/spotify_logo.png">
+    <link rel="icon" href="images-assets/custom-logo.png">
     <link rel="stylesheet" href="css/style.css">
-    <title>Spotify Player</title>
+    <title>TuneWave</title>
 </head>
+
 <body>
 
     <header>
-        <img src="images-assets/spotify_logo.png" alt="" class="logo">
+        <img src="images-assets/custom-logo.png" alt="" class="logo">
         <h1 class="title">Your Song Library</h1>
     </header>
-
+    <div class="search">
+        <input type="text" placeholder="Search for a song or artist..." id="search-bar" class="search-bar" autocomplete="off">
+    </div>
     <div class="all-pages">
 
         <a href="#" data-target="home" class="home-link"><i class="fa-solid fa-arrow-left"></i></a>
@@ -70,6 +74,13 @@
                         <p>Sabrina Carpenter</p>
                     </div>
                 </a>
+                <a href="#" class="song" data-target="too-sweet">
+                    <img src="images-assets/too-sweet.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Too Sweet</h3>
+                        <p>Hozier</p>
+                    </div>
+                </a>
                 <a href="#" class="song" data-target="shameless">
                     <img src="images-assets/shameless.jpg" alt="" class="album-cover-logo">
                     <div class="song-info">
@@ -79,7 +90,7 @@
                 </a>
             </div>
         </div>
-            
+
         <div id="starboy" class="page">
             <div class="player">
                 <div class="album-cover"></div>
@@ -106,7 +117,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -138,7 +149,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -170,7 +181,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -202,7 +213,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -226,7 +237,8 @@
                     <a href="#" data-target="i-see-red" class="forward-link">
                         <i class="fa-solid fa-backward" id="backBtn-take-my-breath"></i>
                     </a>
-                    <i class="fa-solid fa-play" id="icon-take-my-breath" onclick="changeIcon(this, 'take-my-breath')"></i>
+                    <i class="fa-solid fa-play" id="icon-take-my-breath"
+                        onclick="changeIcon(this, 'take-my-breath')"></i>
                     <a href="#" data-target="circles" class="forward-link">
                         <i class="fa-solid fa-forward" id="forwardBtn"></i>
                     </a>
@@ -234,7 +246,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -266,7 +278,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -291,6 +303,38 @@
                         <i class="fa-solid fa-backward" id="backBtn-espresso"></i>
                     </a>
                     <i class="fa-solid fa-play" id="icon-espresso" onclick="changeIcon(this, 'espresso')"></i>
+                    <a href="#" data-target="too-sweet" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="100" value="100" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="too-sweet" class="page">
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Device</div>
+                <div class="song-title">Too Sweet</div>
+                <div class="artist">Hozier</div>
+                <div class="progress-bar">
+                    <div class="too-sweet-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-too-sweet" class="elapsed-time">NA</div>
+                    <div id="remaining-time-too-sweet" class="remaining-time">NA</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="espresso" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-too-sweet"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-espresso" onclick="changeIcon(this, 'too-sweet')"></i>
                     <a href="#" data-target="shameless" class="forward-link">
                         <i class="fa-solid fa-forward" id="forwardBtn"></i>
                     </a>
@@ -298,7 +342,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -319,8 +363,8 @@
                 </div>
                 <div class="play-buttons">
                     <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
-                    <a href="#" data-target="espresso" class="forward-link">
-                    <i class="fa-solid fa-backward" id="backBtn-shameless"></i>
+                    <a href="#" data-target="too-sweet" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-shameless"></i>
                     </a>
                     <i class="fa-solid fa-play" id="icon-shameless" onclick="changeIcon(this, 'shameless')"></i>
                     <a href="#" data-target="starboy" class="forward-link">
@@ -330,7 +374,7 @@
                 </div>
                 <div class="volume">
                     <i class="fa-solid fa-volume-low"></i>
-                    <input type="range" min="0" step="1" max="10" value="10" />
+                    <input type="range" min="0" step="1" max="100" value="100" />
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
             </div>
@@ -340,4 +384,5 @@
 
     <script src="js/script.js"></script>
 </body>
+
 </html>

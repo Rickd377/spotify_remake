@@ -48,36 +48,40 @@ header {
 }
 
 body.starboy-background {
-    background-image: url('/images-assets/starboy.png');
+    background-image: url('../images-assets/starboy.png');
 }
 
 
 body.west-coast-background {
-    background-image: url('/images-assets/west_coast.png');
+    background-image: url('../images-assets/west_coast.png');
 }
 
 body.ocean-eyes-background {
-    background-image: url('/images-assets/ocean_eyes.jpg');
+    background-image: url('../images-assets/ocean_eyes.jpg');
 }
 
 body.i-see-red-background {
-    background-image: url('/images-assets/i_see_red.jpg');
+    background-image: url('../images-assets/i_see_red.jpg');
 }
 
 body.take-my-breath-background {
-    background-image: url('/images-assets/take_my_breath.jpg');
+    background-image: url('../images-assets/take_my_breath.jpg');
 }
 
 body.shameless-background {
-    background-image: url('/images-assets/shameless.jpg');
+    background-image: url('../images-assets/shameless.jpg');
 }
 
 body.circles-background {
-    background-image: url('/images-assets/circles.jpg');
+    background-image: url('../images-assets/circles.jpg');
 }
 
 body.espresso-background {
-    background-image: url('/images-assets/espresso.jpg');
+    background-image: url('../images-assets/espresso.jpg');
+}
+
+body.too-sweet-background {
+    background-image: url('../images-assets/too-sweet.jpg');
 }
 
 .hidden {
@@ -92,6 +96,22 @@ header .logo {
     height: 50px;
 }
 
+.search-bar {
+    position: absolute;
+    left: 65%;
+    top: 10.5%;
+    width: 20vw;
+    height: 30px;
+    transform: translateY(-50%);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    outline: none;
+    padding: 0 10px;
+}
+
 .container {
     width: 75vw;
     height: fit-content;
@@ -102,6 +122,7 @@ header .logo {
     left: 50%;
     top: 20%;
     transform: translate(-50%, 0);
+    padding-bottom: 50px;
 }
 
 .song {
@@ -176,10 +197,6 @@ header .logo {
     background-size: cover;
 }
 
-.album-starboy {
-    background-image: url(/Images/weeknd.png);
-}
-
 .device {
     color: #1dcf5d;
     text-transform: capitalize;
@@ -217,7 +234,8 @@ header .logo {
 .take-my-breath-pb,
 .shameless-pb,
 .circles-pb,
-.espresso-pb {
+.espresso-pb,
+.too-sweet-pb {
     position: absolute;
     left: 0;
     height: 100%;
@@ -252,6 +270,10 @@ header .logo {
 
 .espresso-pb {
     animation-duration: 174000ms !important;
+}
+
+.too-sweet-pb {
+    animation-duration: 251000ms !important;
 }
 
 @keyframes progress {
@@ -347,6 +369,16 @@ header .logo {
     position: relative;
 }
 
+.volume i {
+    width: 12px;
+    height: 12px;
+}
+
+.volume .fa-volume-low,
+.volume .fa-volume-xmark {
+    cursor: pointer;
+}
+
 .volume::before {
     content: "Max volume is your current device volume";
     position: absolute;
@@ -389,16 +421,31 @@ input::-webkit-slider-thumb {
         grid-template-columns: repeat(2, 1fr);
         width: 80vw;
     }
+    .search-bar {
+        width: 15vw;
+        left: 72%;
+    }
+    header {
+        font-size: clamp(0.8rem, 1.5vw, 1.4rem);
+    }
 }
 
 @media screen and (max-width: 650px) {
     .container {
         grid-template-columns: repeat(1, 1fr);
         width: 85vw;
+        padding-top: 60px;
     }
 
     .home-link {
         left: 6%;
+    }
+
+    .search-bar {
+        left: 50%;
+        top: 18%;
+        transform: translate(-50%, 0);
+        width: 50vw;
     }
 }
 

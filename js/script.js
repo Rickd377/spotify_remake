@@ -1,16 +1,19 @@
 const audios = {
-    'starboy': new Audio('/images-assets/audio/starboy.mp3'),
-    'west-coast': new Audio('/images-assets/audio/west-coast.mp3'),
-    'take-my-breath': new Audio('/images-assets/audio/take-my-breath.mp3'),
-    'i-see-red': new Audio('/images-assets/audio/i-see-red.mp3'),
-    'ocean-eyes': new Audio('/images-assets/audio/ocean-eyes.mp3'),
-    'shameless': new Audio('/images-assets/audio/shameless.mp3'),
-    'circles': new Audio('/images-assets/audio/circles.mp3'),
-    'espresso': new Audio('/images-assets/audio/espresso.mp3')
+    'starboy': new Audio('images-assets/audio/starboy.mp3'),
+    'west-coast': new Audio('images-assets/audio/west-coast.mp3'),
+    'take-my-breath': new Audio('images-assets/audio/take-my-breath.mp3'),
+    'i-see-red': new Audio('images-assets/audio/i-see-red.mp3'),
+    'ocean-eyes': new Audio('images-assets/audio/ocean-eyes.mp3'),
+    'shameless': new Audio('images-assets/audio/shameless.mp3'),
+    'circles': new Audio('images-assets/audio/circles.mp3'),
+    'espresso': new Audio('images-assets/audio/espresso.mp3'),
+    'too-sweet': new Audio('images-assets/audio/too-sweet.mp3')
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     let lastPage = null;
+    let sharedVolume = 1; // Default volume value (0 to 10)
+
     const formatTime = (time) => `${Math.floor(time / 60)}:${String(time % 60).padStart(2, '0')}`;
     const updateTimes = (song) => {
         const audio = audios[song];
@@ -71,11 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
         document.getElementById(targetPage).style.display = 'block';
         document.body.className = targetPage === 'home' ? '' : `${targetPage}-background page-centered`;
-        document.querySelector('header').classList.toggle('hidden-header', targetPage !== 'home');
+        document.querySelector('header').classList.toggle('hidden', targetPage !== 'home');
+        document.querySelector('.search').classList.toggle('hidden', targetPage !== 'home');
         document.querySelector('.home-link').classList.toggle('hidden', targetPage === 'home');
         const albumCover = document.querySelector(`#${targetPage} .album-cover`);
         if (albumCover) albumCover.style.backgroundImage = getComputedStyle(document.body).backgroundImage;
         if (targetPage !== 'home') resetTimes(targetPage);
+        playAudio(targetPage); // Automatically play audio and start animation
     };
 
     const resetIconsAndAudio = () => {
@@ -95,12 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getRandomPage = () => {
-        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso'];
+        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso', 'too-sweet'];
         let randomPage;
         do {
             randomPage = pages[Math.floor(Math.random() * pages.length)];
         } while (randomPage === lastPage);
         return randomPage;
+    };
+
+    const getNextPage = (currentPage) => {
+        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso', 'too-sweet'];
+        const currentIndex = pages.indexOf(currentPage);
+        return pages[(currentIndex + 1) % pages.length];
     };
 
     const toggleClassOnAllElements = (selector, className) => document.querySelectorAll(selector).forEach(element => element.classList.toggle(className));
@@ -144,11 +155,42 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(`remaining-time-${song}`).textContent = `-${formatTime(Math.floor(audios[song].duration))}`;
         });
         audios[song].addEventListener('ended', () => {
-            const repeatButton = document.querySelector(`#${song} .fa-repeat`);
-            if (repeatButton && repeatButton.classList.contains('icon-switch-green')) {
-                resetAudio(song);
-                audios[song].play();
-                restartAnimation(song);
+            const shuffleButton = document.querySelector('.fa-shuffle.icon-switch-green');
+            const currentPage = sessionStorage.getItem('currentPage');
+            let nextPage;
+            if (shuffleButton) {
+                nextPage = getRandomPage();
+            } else {
+                nextPage = getNextPage(currentPage);
+            }
+            sessionStorage.setItem('currentPage', nextPage);
+            togglePage(nextPage);
+        });
+    });
+
+    const playAudio = (song) => {
+        const audio = audios[song];
+        audio.play();
+        startAnimation(song);
+        const playIcon = document.querySelector(`#${song} .fa-play`);
+        if (playIcon) {
+            playIcon.classList.remove('fa-play');
+            playIcon.classList.add('fa-pause');
+        }
+    };
+
+    const searchBar = document.getElementById('search-bar');
+    const songs = document.querySelectorAll('.container .song');
+
+    searchBar.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        songs.forEach(song => {
+            const title = song.querySelector('.song-info h3').textContent.toLowerCase();
+            const artist = song.querySelector('.song-info p').textContent.toLowerCase();
+            if (title.includes(searchTerm) || artist.includes(searchTerm)) {
+                song.style.display = 'flex';
+            } else {
+                song.style.display = 'none';
             }
         });
     });
@@ -167,9 +209,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateDeviceText);
     const currentPage = sessionStorage.getItem('currentPage') || 'home';
     togglePage(currentPage);
-    document.querySelectorAll('.volume input[type="range"]').forEach(volumeControl => {
+
+    const volumeControls = document.querySelectorAll('.volume input[type="range"]');
+    const updateVolumeControls = () => {
+        volumeControls.forEach(control => control.value = sharedVolume);
+    };
+
+    volumeControls.forEach(volumeControl => {
+        volumeControl.value = sharedVolume; // Initialize with shared volume value
+
         volumeControl.addEventListener('input', (e) => {
-            const volume = e.target.value / 10;
+            sharedVolume = e.target.value;
+            const volume = sharedVolume / 100;
             const player = e.target.closest('.player');
             const song = player.querySelector('.song-title').textContent.trim().toLowerCase().replace(/\s+/g, '-');
             if (audios[song]) {
@@ -177,6 +228,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`Volume for ${song} set to ${volume}`);
             } else {
                 console.error(`Audio element for ${song} not found`);
+            }
+        });
+    });
+
+    // Volume icon click event
+    document.querySelectorAll('.fa-volume-low').forEach(volumeIcon => {
+        volumeIcon.addEventListener('click', (e) => {
+            const icon = e.currentTarget;
+            const player = icon.closest('.player');
+            const song = player.querySelector('.song-title').textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            const volumeControl = player.querySelector('.volume input[type="range"]');
+            if (icon.classList.contains('fa-volume-low')) {
+                icon.classList.remove('fa-volume-low');
+                icon.classList.add('fa-volume-xmark');
+                audios[song].muted = true;
+                volumeControl.value = 1;
+            } else {
+                icon.classList.remove('fa-volume-xmark');
+                icon.classList.add('fa-volume-low');
+                audios[song].muted = false;
+                volumeControl.value = sharedVolume;
             }
         });
     });
