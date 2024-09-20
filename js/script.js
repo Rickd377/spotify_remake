@@ -5,22 +5,17 @@ const audios = {
     'i-see-red': new Audio('/images-assets/audio/i-see-red.mp3'),
     'ocean-eyes': new Audio('/images-assets/audio/ocean-eyes.mp3'),
     'shameless': new Audio('/images-assets/audio/shameless.mp3'),
-    'circles': new Audio('/images-assets/audio/circles.mp3')
+    'circles': new Audio('/images-assets/audio/circles.mp3'),
+    'espresso': new Audio('/images-assets/audio/espresso.mp3')
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     let lastPage = null;
-
     const formatTime = (time) => `${Math.floor(time / 60)}:${String(time % 60).padStart(2, '0')}`;
-
     const updateTimes = (song) => {
         const audio = audios[song];
-        const elapsedTimeElement = document.getElementById(`elapsed-time-${song}`);
-        const remainingTimeElement = document.getElementById(`remaining-time-${song}`);
-        const elapsed = Math.floor(audio.currentTime);
-        const remaining = Math.floor(audio.duration - elapsed);
-        elapsedTimeElement.textContent = formatTime(elapsed);
-        remainingTimeElement.textContent = `-${formatTime(remaining)}`;
+        document.getElementById(`elapsed-time-${song}`).textContent = formatTime(Math.floor(audio.currentTime));
+        document.getElementById(`remaining-time-${song}`).textContent = `-${formatTime(Math.floor(audio.duration - audio.currentTime))}`;
     };
 
     const setProgressBar = (song, playState, elapsedPercentage = 0, remainingDuration = 230) => {
@@ -42,10 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const resetTimes = (song) => {
-        const elapsedTimeElement = document.getElementById(`elapsed-time-${song}`);
-        const remainingTimeElement = document.getElementById(`remaining-time-${song}`);
-        elapsedTimeElement.textContent = '0:00';
-        remainingTimeElement.textContent = `-${formatTime(Math.floor(audios[song].duration))}`;
+        document.getElementById(`elapsed-time-${song}`).textContent = '0:00';
+        document.getElementById(`remaining-time-${song}`).textContent = `-${formatTime(Math.floor(audios[song].duration))}`;
     };
 
     const resetAudio = (song) => {
@@ -71,12 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const resetAllAudio = () => {
-        Object.keys(audios).forEach(song => {
-            resetAudio(song);
-        });
-    };
-
+    const resetAllAudio = () => Object.keys(audios).forEach(song => resetAudio(song));
     const togglePage = (targetPage) => {
         pauseAllAudio();
         resetAllAudio();
@@ -86,14 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('header').classList.toggle('hidden-header', targetPage !== 'home');
         document.querySelector('.home-link').classList.toggle('hidden', targetPage === 'home');
         const albumCover = document.querySelector(`#${targetPage} .album-cover`);
-        if (albumCover) {
-            albumCover.style.backgroundImage = getComputedStyle(document.body).backgroundImage;
-        }
-
-        // Reset times for the target page
-        if (targetPage !== 'home') {
-            resetTimes(targetPage);
-        }
+        if (albumCover) albumCover.style.backgroundImage = getComputedStyle(document.body).backgroundImage;
+        if (targetPage !== 'home') resetTimes(targetPage);
     };
 
     const resetIconsAndAudio = () => {
@@ -101,9 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             icon.classList.remove('fa-pause');
             icon.classList.add('fa-play');
         });
-        Object.keys(audios).forEach(song => {
-            resetAudio(song);
-        });
+        resetAllAudio();
     };
 
     const restartAnimation = (song) => {
@@ -115,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getRandomPage = () => {
-        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles'];
+        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso'];
         let randomPage;
         do {
             randomPage = pages[Math.floor(Math.random() * pages.length)];
@@ -123,12 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return randomPage;
     };
 
-    const toggleClassOnAllElements = (selector, className) => {
-        document.querySelectorAll(selector).forEach(element => {
-            element.classList.toggle(className);
-        });
-    };
-
+    const toggleClassOnAllElements = (selector, className) => document.querySelectorAll(selector).forEach(element => element.classList.toggle(className));
     window.changeIcon = (element, song) => {
         element.classList.toggle('fa-play');
         element.classList.toggle('fa-pause');
@@ -145,20 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleClassOnAllElements('.fa-repeat', 'icon-switch-green');
         }
     };
-
-    document.querySelectorAll('.song, .forward-link, .backward-link').forEach(link => 
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const shuffleButton = document.querySelector('.fa-shuffle.icon-switch-green');
-            let targetPage = e.currentTarget.getAttribute('data-target');
-            if (shuffleButton) {
-                targetPage = getRandomPage();
-            }
-            lastPage = targetPage;
-            sessionStorage.setItem('currentPage', targetPage);
-            togglePage(targetPage);
-        })
-    );
+    
+    document.querySelectorAll('.song, .forward-link, .backward-link').forEach(link => link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const shuffleButton = document.querySelector('.fa-shuffle.icon-switch-green');
+        let targetPage = e.currentTarget.getAttribute('data-target');
+        if (shuffleButton) targetPage = getRandomPage();
+        lastPage = targetPage;
+        sessionStorage.setItem('currentPage', targetPage);
+        togglePage(targetPage);
+    }));
 
     document.querySelector('.home-link').addEventListener('click', (e) => {
         e.preventDefault();
@@ -172,8 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audios[song].addEventListener('loadedmetadata', () => {
             document.getElementById(`remaining-time-${song}`).textContent = `-${formatTime(Math.floor(audios[song].duration))}`;
         });
-
-        // Add event listener for when the audio ends
         audios[song].addEventListener('ended', () => {
             const repeatButton = document.querySelector(`#${song} .fa-repeat`);
             if (repeatButton && repeatButton.classList.contains('icon-switch-green')) {
@@ -185,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const deviceElement = document.querySelector('.device');
-
     const updateDeviceText = () => {
         if (window.matchMedia('(max-width: 600px)').matches) {
             deviceElement.textContent = 'This Phone';
@@ -195,23 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
             deviceElement.textContent = 'This Computer';
         }
     };
-
-    // Initial check
     updateDeviceText();
-
-    // Add event listener for screen size changes
     window.addEventListener('resize', updateDeviceText);
-
-    // Initial check
-    updateDeviceText();
-
-    // Add event listener for screen size changes
-    window.addEventListener('resize', updateDeviceText);
-
     const currentPage = sessionStorage.getItem('currentPage') || 'home';
     togglePage(currentPage);
-
-    // Volume control
     document.querySelectorAll('.volume input[type="range"]').forEach(volumeControl => {
         volumeControl.addEventListener('input', (e) => {
             const volume = e.target.value / 10;
@@ -219,6 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const song = player.querySelector('.song-title').textContent.trim().toLowerCase().replace(/\s+/g, '-');
             if (audios[song]) {
                 audios[song].volume = volume;
+                console.log(`Volume for ${song} set to ${volume}`);
+            } else {
+                console.error(`Audio element for ${song} not found`);
             }
         });
     });

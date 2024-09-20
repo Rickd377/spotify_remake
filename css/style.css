@@ -76,6 +76,10 @@ body.circles-background {
     background-image: url('/images-assets/circles.jpg');
 }
 
+body.espresso-background {
+    background-image: url('/images-assets/espresso.jpg');
+}
+
 .hidden {
     display: none;
 }
@@ -212,7 +216,8 @@ header .logo {
 .i-see-red-pb,
 .take-my-breath-pb,
 .shameless-pb,
-.circles-pb {
+.circles-pb,
+.espresso-pb {
     position: absolute;
     left: 0;
     height: 100%;
@@ -243,6 +248,10 @@ header .logo {
 
 .shameless-pb {
     animation-duration: 216000ms !important;
+}
+
+.espresso-pb {
+    animation-duration: 174000ms !important;
 }
 
 @keyframes progress {
@@ -335,6 +344,14 @@ header .logo {
     font-size: 13px;
     gap: 5px;
     margin-top: 30px;
+    position: relative;
+}
+
+.volume::before {
+    content: "Max volume is your current device volume";
+    position: absolute;
+    top: 150%;
+    font-size: 0.7rem;
 }
 
 .volume input {
