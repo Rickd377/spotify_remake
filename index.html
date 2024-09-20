@@ -56,6 +56,13 @@
                         <p>The Weeknd</p>
                     </div>
                 </a>
+                <a href="#" class="song" data-target="circles">
+                    <img src="images-assets/circles.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Circles</h3>
+                        <p>Post Malone</p>
+                    </div>
+                </a>
                 <a href="#" class="song" data-target="shameless">
                     <img src="images-assets/shameless.jpg" alt="" class="album-cover-logo">
                     <div class="song-info">
@@ -213,6 +220,38 @@
                         <i class="fa-solid fa-backward" id="backBtn-take-my-breath"></i>
                     </a>
                     <i class="fa-solid fa-play" id="icon-take-my-breath" onclick="changeIcon(this, 'take-my-breath')"></i>
+                    <a href="#" data-target="circles" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="10" value="1" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="circles" class="page">
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Computer</div>
+                <div class="song-title">circles</div>
+                <div class="artist">Post Malone</div>
+                <div class="progress-bar">
+                    <div class="circles-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-circles" class="elapsed-time">0:00</div>
+                    <div id="remaining-time-circles" class="remaining-time">-3:50</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="take-my-breath" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-circles"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-circles" onclick="changeIcon(this, 'circles')"></i>
                     <a href="#" data-target="shameless" class="forward-link">
                         <i class="fa-solid fa-forward" id="forwardBtn"></i>
                     </a>
@@ -241,7 +280,7 @@
                 </div>
                 <div class="play-buttons">
                     <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
-                    <a href="#" data-target="take-my-breath" class="forward-link">
+                    <a href="#" data-target="circles" class="forward-link">
                     <i class="fa-solid fa-backward" id="backBtn-shameless"></i>
                     </a>
                     <i class="fa-solid fa-play" id="icon-shameless" onclick="changeIcon(this, 'shameless')"></i>

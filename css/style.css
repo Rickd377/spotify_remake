@@ -7,15 +7,15 @@ body {
     font-family: 'Roboto', sans-serif;
     background-image: url(../images-assets/background.png);
     background-size: cover;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
     display: flex;
     justify-content: center;
-    padding: 125px 8% 0 8%;
-    padding-top: 150px;
+    align-items: center;
     color: white;
+    background-position: 50% 0;
 }
 
 :root {
@@ -37,7 +37,7 @@ a {
 }
 
 header {
-    height: 150px;
+    height: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,6 +72,10 @@ body.shameless-background {
     background-image: url('/images-assets/shameless.jpg');
 }
 
+body.circles-background {
+    background-image: url('/images-assets/circles.jpg');
+}
+
 .hidden {
     display: none;
 }
@@ -85,11 +89,15 @@ header .logo {
 }
 
 .container {
-    width: 1200px;
+    width: 75vw;
     height: fit-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, 0);
 }
 
 .song {
@@ -203,7 +211,8 @@ header .logo {
 .ocean-eyes-pb,
 .i-see-red-pb,
 .take-my-breath-pb,
-.shameless-pb {
+.shameless-pb,
+.circles-pb {
     position: absolute;
     left: 0;
     height: 100%;
@@ -226,6 +235,10 @@ header .logo {
 
 .take-my-breath-pb {
     animation-duration: 224000ms !important;
+}
+
+.circles-pb {
+    animation-duration: 212000ms !important;
 }
 
 .shameless-pb {
@@ -352,4 +365,31 @@ input::-webkit-slider-thumb {
     position: absolute;
     top: 5px;
     left: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+        width: 80vw;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+        width: 85vw;
+    }
+
+    .home-link {
+        left: 6%;
+    }
+}
+
+@media screen and (max-width: 340px) {
+   .title {
+         font-size: 1.5rem;
+   }
+   .logo {
+        height: 40px;
+   }
 }

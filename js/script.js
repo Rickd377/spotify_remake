@@ -4,7 +4,8 @@ const audios = {
     'take-my-breath': new Audio('/images-assets/audio/take-my-breath.mp3'),
     'i-see-red': new Audio('/images-assets/audio/i-see-red.mp3'),
     'ocean-eyes': new Audio('/images-assets/audio/ocean-eyes.mp3'),
-    'shameless': new Audio('/images-assets/audio/shameless.mp3')
+    'shameless': new Audio('/images-assets/audio/shameless.mp3'),
+    'circles': new Audio('/images-assets/audio/circles.mp3')
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,14 +56,39 @@ document.addEventListener('DOMContentLoaded', () => {
         setProgressBar(song, 'paused');
     };
 
+    const pauseAllAudio = () => {
+        Object.keys(audios).forEach(song => {
+            const audio = audios[song];
+            if (!audio.paused) {
+                audio.pause();
+                stopAnimation(song);
+                const playIcon = document.querySelector(`#${song} .fa-pause`);
+                if (playIcon) {
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                }
+            }
+        });
+    };
+
+    const resetAllAudio = () => {
+        Object.keys(audios).forEach(song => {
+            resetAudio(song);
+        });
+    };
+
     const togglePage = (targetPage) => {
+        pauseAllAudio();
+        resetAllAudio();
         document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
         document.getElementById(targetPage).style.display = 'block';
-        document.body.className = targetPage === 'home' ? '' : `${targetPage}-background`;
+        document.body.className = targetPage === 'home' ? '' : `${targetPage}-background page-centered`;
         document.querySelector('header').classList.toggle('hidden-header', targetPage !== 'home');
         document.querySelector('.home-link').classList.toggle('hidden', targetPage === 'home');
         const albumCover = document.querySelector(`#${targetPage} .album-cover`);
-        if (albumCover) albumCover.style.backgroundImage = getComputedStyle(document.body).backgroundImage;
+        if (albumCover) {
+            albumCover.style.backgroundImage = getComputedStyle(document.body).backgroundImage;
+        }
 
         // Reset times for the target page
         if (targetPage !== 'home') {
@@ -89,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getRandomPage = () => {
-        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless'];
+        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles'];
         let randomPage;
         do {
             randomPage = pages[Math.floor(Math.random() * pages.length)];
@@ -158,6 +184,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const deviceElement = document.querySelector('.device');
+
+    const updateDeviceText = () => {
+        if (window.matchMedia('(max-width: 600px)').matches) {
+            deviceElement.textContent = 'This Phone';
+        } else if (window.matchMedia('(max-width: 1024px)').matches) {
+            deviceElement.textContent = 'This Tablet';
+        } else {
+            deviceElement.textContent = 'This Computer';
+        }
+    };
+
+    // Initial check
+    updateDeviceText();
+
+    // Add event listener for screen size changes
+    window.addEventListener('resize', updateDeviceText);
+
+    // Initial check
+    updateDeviceText();
+
+    // Add event listener for screen size changes
+    window.addEventListener('resize', updateDeviceText);
+
     const currentPage = sessionStorage.getItem('currentPage') || 'home';
     togglePage(currentPage);
+
+    // Volume control
+    document.querySelectorAll('.volume input[type="range"]').forEach(volumeControl => {
+        volumeControl.addEventListener('input', (e) => {
+            const volume = e.target.value / 10;
+            const player = e.target.closest('.player');
+            const song = player.querySelector('.song-title').textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            if (audios[song]) {
+                audios[song].volume = volume;
+            }
+        });
+    });
 });
