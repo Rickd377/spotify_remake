@@ -7,7 +7,8 @@ const audios = {
     'shameless': new Audio('images-assets/audio/shameless.mp3'),
     'circles': new Audio('images-assets/audio/circles.mp3'),
     'espresso': new Audio('images-assets/audio/espresso.mp3'),
-    'too-sweet': new Audio('images-assets/audio/too-sweet.mp3')
+    'too-sweet': new Audio('images-assets/audio/too-sweet.mp3'),
+    'skyfall': new Audio('images-assets/audio/skyfall.mp3'),
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -100,7 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getRandomPage = () => {
-        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso', 'too-sweet'];
+        const pages = [
+            'starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso', 'too-sweet',
+            'skyfall'
+        ];
         let randomPage;
         do {
             randomPage = pages[Math.floor(Math.random() * pages.length)];
@@ -109,7 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getNextPage = (currentPage) => {
-        const pages = ['starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso', 'too-sweet'];
+        const pages = [
+            'starboy', 'west-coast', 'take-my-breath', 'i-see-red', 'ocean-eyes', 'shameless', 'circles', 'espresso', 'too-sweet',
+            'skyfall'
+        ];
         const currentIndex = pages.indexOf(currentPage);
         return pages[(currentIndex + 1) % pages.length];
     };

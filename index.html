@@ -81,11 +81,25 @@
                         <p>Hozier</p>
                     </div>
                 </a>
+                <a href="#" class="song" data-target="skyfall">
+                    <img src="images-assets/skyfall.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Skyfall</h3>
+                        <p>Adele</p>
+                    </div>
+                </a>
                 <a href="#" class="song" data-target="shameless">
                     <img src="images-assets/shameless.jpg" alt="" class="album-cover-logo">
                     <div class="song-info">
                         <h3>Shameless</h3>
                         <p>Camila Cabello</p>
+                    </div>
+                </a>
+                <a href="#" class="song" data-target="home">
+                    <img src="images-assets/blank.jpg" alt="" class="album-cover-logo">
+                    <div class="song-info">
+                        <h3>Work in progress...</h3>
+                        <p>Adding more songs</p>
                     </div>
                 </a>
             </div>
@@ -335,6 +349,38 @@
                         <i class="fa-solid fa-backward" id="backBtn-too-sweet"></i>
                     </a>
                     <i class="fa-solid fa-play" id="icon-espresso" onclick="changeIcon(this, 'too-sweet')"></i>
+                    <a href="#" data-target="skyfall" class="forward-link">
+                        <i class="fa-solid fa-forward" id="forwardBtn"></i>
+                    </a>
+                    <i class="fa-solid fa-repeat" id="switchtwo" onclick="switchColor(this)"></i>
+                </div>
+                <div class="volume">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" min="0" step="1" max="100" value="100" />
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="skyfall" class="page">
+            <div class="player">
+                <div class="album-cover"></div>
+                <div class="device">This Device</div>
+                <div class="song-title">Skyfall</div>
+                <div class="artist">Adele</div>
+                <div class="progress-bar">
+                    <div class="skyfall-pb"></div>
+                </div>
+                <div class="times">
+                    <div id="elapsed-time-skyfall" class="elapsed-time">NA</div>
+                    <div id="remaining-time-skyfall" class="remaining-time">NA</div>
+                </div>
+                <div class="play-buttons">
+                    <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
+                    <a href="#" data-target="too-sweet" class="forward-link">
+                        <i class="fa-solid fa-backward" id="backBtn-skyfall"></i>
+                    </a>
+                    <i class="fa-solid fa-play" id="icon-skyfall" onclick="changeIcon(this, 'skyfall')"></i>
                     <a href="#" data-target="shameless" class="forward-link">
                         <i class="fa-solid fa-forward" id="forwardBtn"></i>
                     </a>
@@ -363,7 +409,7 @@
                 </div>
                 <div class="play-buttons">
                     <i class="fa-solid fa-shuffle" id="switchone" onclick="switchColor(this)"></i>
-                    <a href="#" data-target="too-sweet" class="forward-link">
+                    <a href="#" data-target="skyfall" class="forward-link">
                         <i class="fa-solid fa-backward" id="backBtn-shameless"></i>
                     </a>
                     <i class="fa-solid fa-play" id="icon-shameless" onclick="changeIcon(this, 'shameless')"></i>

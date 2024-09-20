@@ -84,6 +84,10 @@ body.too-sweet-background {
     background-image: url('../images-assets/too-sweet.jpg');
 }
 
+body.skyfall-background {
+    background-image: url('../images-assets/skyfall.jpg');
+}
+
 .hidden {
     display: none;
 }
@@ -235,7 +239,8 @@ header .logo {
 .shameless-pb,
 .circles-pb,
 .espresso-pb,
-.too-sweet-pb {
+.too-sweet-pb,
+.skyfall-pb {
     position: absolute;
     left: 0;
     height: 100%;
@@ -274,6 +279,10 @@ header .logo {
 
 .too-sweet-pb {
     animation-duration: 251000ms !important;
+}
+
+.skyfall-pb {
+    animation-duration: 285000ms !important;
 }
 
 @keyframes progress {
